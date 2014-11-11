@@ -84,13 +84,7 @@ public class FTPHelper {
 				if (downloadCount%20 == 0) {
 					// Pause after 20 downloads for 5 seconds
 					try {
-						// Temporarily disconnect from the client
-						client.disconnect(true);
-						System.out.println("Sleeping for 5 seconds");
-						// Sleep for 5 seconds
-						Thread.sleep(5000);
-						// Reconnect to the client
-						connectToServer("ftp.sec.gov");
+						sleepDownload(5000);
 					} catch(InterruptedException ie) {
 						ie.printStackTrace();
 					}
@@ -115,14 +109,34 @@ public class FTPHelper {
 				connectToServer("ftp.sec.gov");
 			} catch (FTPException ftpe) {
 				System.out.println("General FTP Error");
+				try {
+					sleepDownload(30000);
+				} catch(InterruptedException ie) {
+					ie.printStackTrace();
+				}
 				errorCount++;
 			} catch (SocketTimeoutException ste) {
 				System.out.println("Request timed out");
+				try {
+					sleepDownload(30000);
+				} catch(InterruptedException ie) {
+					ie.printStackTrace();
+				}
 				errorCount++;
 			}
+			System.out.println();
 		}
 		System.out.println("----------------------------------------");
 		System.out.println("Batch Download complete!");
 		System.out.println(errorCount + " files failed to download");
+	}
+	
+	private void sleepDownload(int sleepTime) throws InterruptedException, IllegalStateException, IOException, FTPIllegalReplyException, FTPException {
+		// Disconnecting from the client
+		client.disconnect(true);
+		System.out.println("Sleeping for " + (sleepTime/1000) + " seconds" );
+		// Sleeping for the given amount of milliseconds
+		Thread.sleep(sleepTime);
+		connectToServer("ftp.sec.gov");
 	}
 }
