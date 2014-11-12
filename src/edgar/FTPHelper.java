@@ -123,6 +123,13 @@ public class FTPHelper {
 					ie.printStackTrace();
 				}
 				errorCount++;
+			} catch(IOException ie) {
+				try {
+					sleepDownload(30000);
+				} catch(InterruptedException intE) {
+					intE.printStackTrace();
+				}
+				errorCount++;
 			}
 			System.out.println();
 		}
