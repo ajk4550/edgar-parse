@@ -23,7 +23,7 @@ public class RawFileSearch {
 	
 	public void beginSearch() throws IOException {
 		// looping through the list of files
-		for (int i=0; i<fileNames.size();i++) {
+		for (int i=20323; i<fileNames.size();i++) {
 			// getting the path to a single file
 			String path = fileNames.get(i);
 			// splitting the URI into the various parts

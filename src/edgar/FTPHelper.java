@@ -78,7 +78,7 @@ public class FTPHelper {
 		int errorCount = 0;
 		int downloadCount = 0;
 		// looping through each of the files
-		for(int i=0; i<arraySize; i++) {
+		for(int i=20323; i<arraySize; i++) {
 			// Pause the download every 5 seconds to prevent request timeout
 			try {
 				if (downloadCount%20 == 0) {

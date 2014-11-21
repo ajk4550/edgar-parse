@@ -11,9 +11,12 @@ public class Edgar {
 			MasterParser mp = new MasterParser("master.idx");
 			ArrayList<String> fileList = mp.parseFileToArray();
 			// Connecting to the remote Server
-			edgarFTP.connectToServer("ftp.sec.gov");
+			//edgarFTP.connectToServer("ftp.sec.gov");
 			// Downloading all of the files in the array
-			edgarFTP.downloadBatchFiles(fileList);
+			//edgarFTP.downloadBatchFiles(fileList);
+			// Parsing downloaded files to CSV
+			CSVWriter csvw = new CSVWriter();
+			csvw.writeToCSV();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
